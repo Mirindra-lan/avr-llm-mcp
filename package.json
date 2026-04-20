@@ -1,0 +1,25 @@
+{
+  "name": "avr-llm-mcp",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "MCP",
+    "LLM",
+    "avr-llm"
+  ],
+  "license": "ISC",
+  "author": "LANTOSOA Mirindra Lucien",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "axios": "^1.15.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "openai": "^6.34.0",
+    "zod": "^4.3.6"
+  }
+}
