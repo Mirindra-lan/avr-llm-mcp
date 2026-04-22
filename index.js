@@ -8,6 +8,7 @@ const app = express();
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
   baseURL: process.env.OPENAI_BASE_URL,
+  timeout: 10000
 });
 const mcp = new MCPClient();
 
@@ -23,6 +24,7 @@ app.post('/prompt-stream', async (req, res) => {
   // On garde une trace de la conversation locale pour pouvoir ajouter les réponses des tools
   let conversation = [
     { role: "system", content: process.env.SYSTEM_PROMPT || "You are an assistant" },
+    { role: "system", content: `Voici l'uuid est ne le demande jamais à l'utilisateur: ${uuid}`},
     ...messages
   ];
 
@@ -75,7 +77,7 @@ app.post('/prompt-stream', async (req, res) => {
         
         try {
           const args = JSON.parse(functionArgs || "{}");
-          const result = await mcp.callTool(functionName, args);
+          const result = await mcp.callTool(functionName, {...args, uuid: uuid});
           const toolResultContent = typeof result === 'string' ? result : JSON.stringify(result);
 
           // 1. Ajouter l'appel de l'IA à l'historique
