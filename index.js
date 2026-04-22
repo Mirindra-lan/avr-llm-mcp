@@ -24,7 +24,7 @@ app.post('/prompt-stream', async (req, res) => {
   // On garde une trace de la conversation locale pour pouvoir ajouter les réponses des tools
   let conversation = [
     { role: "system", content: process.env.SYSTEM_PROMPT || "You are an assistant" },
-    { role: "system", content: `Voici l'uuid est ne le demande jamais à l'utilisateur: ${uuid}`},
+    { role: "system", content: `Here is the uuid: ${uuid}, never ask it to the user`},
     ...messages
   ];
 
